@@ -21,9 +21,15 @@
     <div id="todoapp" class="container">
       <ul id="task_List">
         <li v-for="(task, index) in tasks">
-          <input type="checkbox" name="completed" value=""> <span class="taskName"
-            :class="{completed: tasks.completionStatus}"> {{tasks[index].taskName}}</span> <i
-            class="fas fa-trash-alt"></i><i class="fas fa-star"></i>
+          <input type="checkbox" name="completed" value="">
+          <span class="taskName"
+            :class="{completed: tasks.completionStatus}"> {{tasks[index].taskName}}
+          </span>
+          <span class="clear" @click="clearTask(index)">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+          <!-- /.clear -->
+          <i class="fas fa-star"></i>
         </li>
 
       </ul>

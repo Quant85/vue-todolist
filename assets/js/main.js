@@ -18,35 +18,44 @@ let taskList = new Vue({
   data:{
     tasks: [
       {
-        taskName: "Ricordati di pushare",
+        index: 1,
+        taskName: "Ricordati di pushare1",
         completionStatus: false,
       },
       {
-        taskName: "Ricordati di pushare",
+        index: 2,
+        taskName: "Ricordati di pushare2",
         completionStatus: false,
       },
       {
+        index: 3,
         taskName: "Cambia messaggio di tanto in tanto",
         completionStatus: false,
       },
       {
+        index: 4,
         taskName: "Commenta il codice",
         completionStatus: false,
       },
     ],
     newTask: "",
+    completedTasks:[],
   },
   methods: {
     addTask: function(){
       //con il condizionela evito stringhe vuote - si potrebbe provare ad attivare la condizione di error del tag input
       if (this.newTask.length >= 4) {
         this.tasks.push({
+          index:this.newTask.length+1,
           taskName: this.newTask,
           completionStatus: false
         });
       }
       this.newTask = ''; //elimino il contenuto dell'input dopo il submit/invio dati
-    }
+    },
+    clearTask(index) {
+      this.tasks.splice(index,1);//splice mi permette di rimuovere, in questo caso, 1 elemento, cioè se stesso partendo dall'index cioè dove clicco
+    },
   },
 
 });

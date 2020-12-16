@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo List in VueJs</title>
+  <title>To - Do List in VueJs</title>
   <!-- css local link -->
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Fontawesome  -->
@@ -21,15 +21,16 @@
     <div id="todoapp" class="container">
       <ul id="task_List">
         <li v-for="(task, index) in tasks">
-          <input type="checkbox" name="completed" value=""> <span> {{tasks[index]}}</span> <i
+          <input type="checkbox" name="completed" value=""> <span class="taskName"
+            :class="{completed: tasks.completionStatus}"> {{tasks[index].taskName}}</span> <i
             class="fas fa-trash-alt"></i><i class="fas fa-star"></i>
         </li>
 
       </ul>
-      <form class="add_item">
+      <form class="add_item" method="POST" @submit.prevent="addTask">
         <label for="fname">Inserisci la tua task - non meno di 4 caratteri </label> <br>
         <input type="text" id="input_task" name="input_task" autocomplete="off" placeholder="Aggiungi un nuovo compito"
-          autofocus>
+          autofocus v-model="newTask">
         <input type="submit" value="Add">
       </form>
       <!-- /.add_item -->

@@ -16,7 +16,37 @@ Attenzione: l'utente non deve inserire tasks vuote ma almeno un tot di caratteri
 let taskList = new Vue({
   el:'#todoapp',
   data:{
-    tasks: ["Ricordati di pushare","Ricordati di pushare","Ricordati di pushare","Cambia ogni tanto messaggio","Ricordati di aggiungere commenti al codice"],
+    tasks: [
+      {
+        taskName: "Ricordati di pushare",
+        completionStatus: false,
+      },
+      {
+        taskName: "Ricordati di pushare",
+        completionStatus: false,
+      },
+      {
+        taskName: "Cambia messaggio di tanto in tanto",
+        completionStatus: false,
+      },
+      {
+        taskName: "Commenta il codice",
+        completionStatus: false,
+      },
+    ],
     newTask: "",
   },
+  methods: {
+    addTask: function(){
+      //con il condizionela evito stringhe vuote - si potrebbe provare ad attivare la condizione di error del tag input
+      if (this.newTask.length >= 4) {
+        this.tasks.push({
+          taskName: this.newTask,
+          completionStatus: false
+        });
+      }
+      this.newTask = ''; //elimino il contenuto dell'input dopo il submit/invio dati
+    }
+  },
+
 });

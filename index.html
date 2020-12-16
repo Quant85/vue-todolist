@@ -19,20 +19,22 @@
   </header>
   <main>
     <div id="todoapp" class="container">
-      <ul id="task_List">
+      <ul id="task_List" v-if="tasks.length">
         <li v-for="(task, index) in tasks">
           <input type="checkbox" name="completed" value="">
-          <span class="taskName"
-            :class="{completed: tasks.completionStatus}"> {{tasks[index].taskName}}
+          <span> {{tasks[index].taskName}}
           </span>
           <span class="clear" @click="clearTask(index)">
             <i class="fas fa-trash-alt"></i>
           </span>
           <!-- /.clear -->
-          <i class="fas fa-star"></i>
+          <span class="important" @click="importantTask(index)">
+            <i class="fas fa-star"></i>
+          </span> <!-- /.important -->
         </li>
 
       </ul>
+      <h2 class="title" v-else>Nulla da fare - Vai a Giocare a Cyberpunk 2077</h2>
       <form class="add_item" method="POST" @submit.prevent="addTask">
         <label for="fname">Inserisci la tua task - non meno di 4 caratteri </label> <br>
         <input type="text" id="input_task" name="input_task" autocomplete="off" placeholder="Aggiungi un nuovo compito"

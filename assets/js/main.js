@@ -18,36 +18,39 @@ let taskList = new Vue({
   data:{
     tasks: [
       {
-        index: 1,
         taskName: "Ricordati di pushare1",
+        important: false,
         completionStatus: false,
       },
       {
-        index: 2,
         taskName: "Ricordati di pushare2",
+        important: false,
         completionStatus: false,
       },
       {
-        index: 3,
         taskName: "Cambia messaggio di tanto in tanto",
+        important: false,
         completionStatus: false,
       },
       {
-        index: 4,
         taskName: "Commenta il codice",
+        important: false,
         completionStatus: false,
       },
     ],
     newTask: "",
     completedTasks:[],
   },
+  important: {
+
+  },
   methods: {
     addTask: function(){
       //con il condizionela evito stringhe vuote - si potrebbe provare ad attivare la condizione di error del tag input
       if (this.newTask.length >= 4) {
         this.tasks.push({
-          index:this.newTask.length+1,
           taskName: this.newTask,
+          important: false,
           completionStatus: false
         });
       }
@@ -56,6 +59,18 @@ let taskList = new Vue({
     clearTask(index) {
       this.tasks.splice(index,1);//splice mi permette di rimuovere, in questo caso, 1 elemento, cioè se stesso partendo dall'index cioè dove clicco
     },
+    importantTask(index) {
+      if (this.tasks[index].important) {
+        this.tasks[index].important = false;
+        console.log(this.tasks[index].important);
+        this.tasks.sort((x,y) => y.important - x.important);//ordine decrescente
+        console.log(this.tasks);
+      } else if (!this.tasks[index].important){
+        this.tasks[index].important = true;
+        console.log(this.tasks[index].important);
+        this.tasks.sort((x,y) => y.important - x.important);//ordine decrescente mi garantisce che gli iSimportan siano sempre più in alto de notImportant
+        console.log(this.tasks);
+      }
+    },
   },
-
 });

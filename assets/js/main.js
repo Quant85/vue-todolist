@@ -20,21 +20,25 @@ let taskList = new Vue({
       {
         taskName: "Ricordati di pushare1",
         important: false,
+        editable: true,
         completionStatus: false,
       },
       {
         taskName: "Ricordati di pushare2",
-        important: false,
+        editable: false,
+        important: true,
         completionStatus: false,
       },
       {
         taskName: "Cambia messaggio di tanto in tanto",
-        important: false,
+        modificabile: false,
+        editable: true,
         completionStatus: false,
       },
       {
         taskName: "Commenta il codice",
-        important: false,
+        editable: false,
+        important: true,
         completionStatus: false,
       },
     ],
@@ -50,6 +54,7 @@ let taskList = new Vue({
       if (this.newTask.length >= 4) {
         this.tasks.push({
           taskName: this.newTask,
+          editable: true,
           important: false,
           completionStatus: false
         });
@@ -62,15 +67,21 @@ let taskList = new Vue({
     importantTask(index) {
       if (this.tasks[index].important) {
         this.tasks[index].important = false;
-        console.log(this.tasks[index].important);
         this.tasks.sort((x,y) => y.important - x.important);//ordine decrescente
-        console.log(this.tasks);
+        
       } else if (!this.tasks[index].important){
         this.tasks[index].important = true;
-        console.log(this.tasks[index].important);
         this.tasks.sort((x,y) => y.important - x.important);//ordine decrescente mi garantisce che gli iSimportan siano sempre più in alto de notImportant
-        console.log(this.tasks);
       }
+    },
+    editableClick(index) {
+      if (this.tasks[index].editable) {
+        this.tasks[index].editable = false;
+      } else if (!this.tasks[index].editable) {
+        this.tasks[index].editable = true;
+      } //questo metodo mi consente di attivare e disattivare la proprieta di accesso alla casella di testo della textarea variando il booleano da true a false di readonly
+
     },
   },
 });
+

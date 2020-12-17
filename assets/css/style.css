@@ -13,7 +13,67 @@ body {
   align-content: center;
 }
 
+#todolist {
+  border: 1px solid rgb(126, 126, 126);
+  border-radius: 25%;
+  padding: 20px;
+}
+
 .title,
 .add_item {
   text-align: center;
+  margin: 40px;
+}
+/* .container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+} */
+ul {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li{
+  width: 400px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 15px 10px ;
+  margin: 15px auto;
+  position: relative;
+}
+
+.textbox {
+  width: 70%;
+  vertical-align: text-top;
+  text-transform: capitalize;
+  border: 0;
+  resize: none;
+}
+
+.icon_section {
+  position: absolute;
+  right: 0px;
+}
+.clear,
+.important {
+  margin: 0 10px 0 10px;
+}
+
+form .input_task {
+  width: 400px;
+  height: 40px;
+}
+
+input[type="submit"] {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-top: 15px;
+  transition: 250ms ease-out;
+}
+
+input[type="submit"]:hover {
+  color: #fff;
+  background: rgb(14, 146, 14);
 }

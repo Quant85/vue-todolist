@@ -18,9 +18,11 @@
     <img src="" alt="">
 
     <div id="todoapp" class="container">
-      <ul id="task_list" v-if="tasks.length">
+      <ul id="tasks_list" v-if="tasks.length">
         <li v-for="(task, index) in tasks">
-          <input type="checkbox" name="completed" value="">
+          <span class="check"@click="completionTask(index)">
+            <i class="far fa-check-circle"></i>
+          </span>
           <textarea class="textbox" :readonly="tasks[index].editable"> {{tasks[index].taskName}} </textarea>
           <span class="icon_section">
             <span class="modified" @click="editableClick(index)">
@@ -35,7 +37,6 @@
             </span> <!-- /.important -->
           </span>
         </li>
-
       </ul>
       <h2 class="title" v-else>Nulla da fare - Vai a Giocare a Cyberpunk 2077</h2>
       <form class="add_item" method="POST" @submit.prevent="addTask">
@@ -46,9 +47,32 @@
       </form>
       <!-- /.add_item -->
 
-      <ul class="completed">
+      <section class="tasks_completed">
+        <ul class="completed_tasks" v-if="completedTasks.length">
+          <li v-for="(task, index) in completedTasks">
+            <span class="checked">
+              <i class="far fa-check-circle"></i>
+            </span>
+            <textarea class="textbox"
+              :readonly="completedTasks[index].editable"> {{completedTasks[index].taskName}} </textarea>
+            <span class="icon_section">
+              <span id="reload_task" @click="reloadTask(index)">
+                <i class="fas fa-arrow-alt-to-top"></i>
+              </span>
+              <span class="modified" @click="editableCompletedClick(index)">
+                <i class="fas fa-edit"></i>
+              </span>
+              <span class="clear" @click="clearCompletedTask(index)">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+              <!-- /.clear -->
+            </span>
+          </li>
 
-      </ul>
+        </ul>
+        <h2 class="title" v-else="" >Non ci sono Task Completate</h2>
+      </section>
+      <!-- /.tasks_completed -->
     </div>
     <!-- /.container -->
 

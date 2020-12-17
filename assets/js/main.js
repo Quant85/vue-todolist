@@ -19,34 +19,31 @@ let taskList = new Vue({
     tasks: [
       {
         taskName: "Ricordati di pushare1",
-        important: false,
         editable: true,
+        important: false,
         completionStatus: false,
       },
       {
         taskName: "Ricordati di pushare2",
-        editable: false,
-        important: true,
+        editable: true,
+        important: false,
         completionStatus: false,
       },
       {
         taskName: "Cambia messaggio di tanto in tanto",
-        modificabile: false,
         editable: true,
+        important: false,
         completionStatus: false,
       },
       {
         taskName: "Commenta il codice",
-        editable: false,
-        important: true,
+        editable: true,
+        important: false,
         completionStatus: false,
       },
     ],
     newTask: "",
     completedTasks:[],
-  },
-  important: {
-
   },
   methods: {
     addTask: function(){
@@ -80,8 +77,32 @@ let taskList = new Vue({
       } else if (!this.tasks[index].editable) {
         this.tasks[index].editable = true;
       } //questo metodo mi consente di attivare e disattivare la proprieta di accesso alla casella di testo della textarea variando il booleano da true a false di readonly
-
     },
+    completionTask(index) {
+      if (!this.tasks[index].completionStatus) {
+        this.tasks[index].completionStatus = true;
+        this.completedTasks.push(this.tasks[index]);
+        console.log(this.tasks[index]);
+        this.clearTask(index);
+      }
+    },
+    clearCompletedTask(index) {
+      this.completedTasks.splice(index,1);//splice mi permette di rimuovere, in questo caso, 1 elemento, cioè se stesso partendo dall'index cioè dove clicco
+    },
+    editablecompletedClick(index) {
+      if (this.completedTasks[index].editable) {
+        this.completedTasks[index].editable = false;
+      } else if (!this.completedTasks[index].editable) {
+        this.completedTasks[index].editable = true;
+      } //questo metodo mi consente di attivare e disattivare la proprieta di accesso alla casella di testo della textarea variando il booleano da true a false di readonly
+    },
+    reloadTask(index) {
+      if (this.completedTasks[index].completionStatus) {
+        this.completedTasks[index].completionStatus = false;
+        this.tasks.push(this.completedTasks[index]);
+        this.clearCompletedTask(index);
+        } // do la possibilità di modificare una task completata e reintegrarla nelle task da completare
+    }
   },
 });
 

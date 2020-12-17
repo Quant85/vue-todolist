@@ -56,7 +56,8 @@ li{
   right: 0px;
 }
 .clear,
-.important {
+.important,
+#reload_task {
   margin: 0 10px 0 10px;
 }
 

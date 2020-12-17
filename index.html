@@ -7,6 +7,9 @@
   <title>To - Do List in VueJs</title>
   <!-- css local link -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Fontawesome  -->
   <script src="https://kit.fontawesome.com/30fc0982d8.js"></script>
   <script type="text/javascript" src="assets/js/fontawesome/font.js"></script>
@@ -49,6 +52,7 @@
       <!-- /.add_item -->
 
       <section class="tasks_completed">
+        <h2 class="title">Task Completate</h2>
         <ul class="completed_tasks" v-if="completedTasks.length">
           <li v-for="(task, index) in completedTasks">
             <span class="checked">

@@ -13,7 +13,7 @@ body {
   align-content: center;
 }
 
-#todolist {
+#todoapp {
   border: 1px solid rgb(126, 126, 126);
   border-radius: 25%;
   padding: 20px;
@@ -21,14 +21,18 @@ body {
 
 .title,
 .add_item {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: center;
   margin: 40px;
 }
-/* .container {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-} */
+
+img.logo {
+  height: 100px;
+  text-align: center;
+  position: relative;
+  right: 9%;
+}
+
 ul {
   list-style: none;
   white-space: nowrap;
@@ -64,6 +68,7 @@ li{
 form .input_task {
   width: 400px;
   height: 40px;
+  border-radius: 10px;
 }
 
 input[type="submit"] {

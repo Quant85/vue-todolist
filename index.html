@@ -13,11 +13,12 @@
 </head>
 
 <body>
-  <section id="todolist">
+  <section id="todoapp">
     <h1 class="title">To-Do List</h1>
-    <img src="" alt="">
+    <img class="logo" :src="images.logo1" alt="">
+    <img class="logo" :src="images.logo2" alt="">
 
-    <div id="todoapp" class="container">
+    <div id="todolist" class="container">
       <ul id="tasks_list" v-if="tasks.length">
         <li v-for="(task, index) in tasks">
           <span class="check"@click="completionTask(index)">
@@ -41,7 +42,7 @@
       <h2 class="title" v-else>Nulla da fare - Vai a Giocare a Cyberpunk 2077</h2>
       <form class="add_item" method="POST" @submit.prevent="addTask">
         <label for="fname">Inserisci la tua task - non meno di 4 caratteri </label> <br>
-        <input class="input_task" type="text" id="input_task" name="input_task" autocomplete="off" placeholder="Aggiungi un nuovo compito"
+        <input class="input_task" type="text" id="input_task" name="input_task" autocomplete="off" placeholder="Aggiungi una nuova task"
           autofocus v-model="newTask">
         <input type="submit" value="Add">
       </form>

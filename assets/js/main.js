@@ -16,6 +16,10 @@ Attenzione: l'utente non deve inserire tasks vuote ma almeno un tot di caratteri
 let taskList = new Vue({
   el:'#todoapp',
   data:{
+    images:{
+      logo1:"https://cdn.pixabay.com/photo/2020/01/21/18/39/todo-4783676_960_720.png",
+      logo2:"https://www.boolean.careers/images/misc/logo.png",
+    },
     tasks: [
       {
         taskName: "Ricordati di pushare1",

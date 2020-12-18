@@ -18,9 +18,23 @@
 <body>
   <section id="todoapp">
     <h1 class="title">To-Do List</h1>
+    <div id="clock">
+      <p class="time">{{time}}<p>
+    </div>
     <img class="logo" :src="images.logo1" alt="">
     <img class="logo" :src="images.logo2" alt="">
-
+    <span id="icon_task">
+      <i class="top_icon fas fa-clipboard-list"></i> 
+      <span id="counter_task">{{ tasks.length }}</span>
+    </span>
+    <span id="icon_completed_task">
+      <i class="top_icon far fa-clipboard-check"></i> 
+      <span id="counter_completed_task">{{ completedTasks.length }}</span>
+    </span>
+    <span id="icon_trash_task">
+      <i class="top_icon fas fa-trash-alt"></i>
+      <span id="counter_trash_task">{{ trashTasks.length }}</span>
+    </span>
     <div id="todolist" class="container">
       <ul id="tasks_list" v-if="tasks.length">
         <li v-for="(task, index) in tasks">
@@ -32,7 +46,7 @@
             <span class="modified" @click="editableClick(index)">
               <i class="fas fa-edit"></i>
             </span>
-            <span class="clear" @click="clearTask(index)">
+            <span class="clear" @click="shiftTaskTrash(index)">
               <i class="fas fa-trash-alt"></i>
             </span>
             <!-- /.clear -->
@@ -51,33 +65,62 @@
       </form>
       <!-- /.add_item -->
 
-      <section class="tasks_completed">
-        <h2 class="title">Task Completate</h2>
-        <ul class="completed_tasks" v-if="completedTasks.length">
-          <li v-for="(task, index) in completedTasks">
-            <span class="checked">
-              <i class="far fa-check-circle"></i>
-            </span>
-            <textarea class="textbox"
-              :readonly="completedTasks[index].editable"> {{completedTasks[index].taskName}} </textarea>
-            <span class="icon_section">
-              <span id="reload_task" @click="reloadTask(index)">
-                <i class="fas fa-arrow-alt-to-top"></i>
-              </span>
-              <span class="modified" @click="editablecompletedClick(index)">
-                <i class="fas fa-edit"></i>
-              </span>
-              <span class="clear" @click="clearCompletedTask(index)">
-                <i class="fas fa-trash-alt"></i>
-              </span>
-              <!-- /.clear -->
-            </span>
-          </li>
+      <div class="wrap">
 
-        </ul>
-        <h2 class="title" v-else="" >Non ci sono Task Completate</h2>
-      </section>
-      <!-- /.tasks_completed -->
+        <!-- tasks_completed -->
+        <section id="tasks_completed">
+          <h2 class="title">Task Completate</h2>
+          <button @click="clertCompletedList()"><i class="fas fa-bomb"></i></button>
+          <ul class="completed_tasks" v-if="completedTasks.length">
+            <li v-for="(task, index) in completedTasks">
+              <span class="checked">
+                <i class="far fa-check-circle"></i>
+              </span>
+              <textarea class="textbox"
+                :readonly="completedTasks[index].editable"> {{completedTasks[index].taskName}} </textarea>
+              <span class="icon_section">
+                <span id="reload_task" @click="reloadTask(index)">
+                  <i class="fas fa-arrow-alt-to-top"></i>
+                </span>
+                <span class="modified" @click="editablecompletedClick(index)">
+                  <i class="fas fa-edit"></i>
+                </span>
+                <span class="clear" @click="clearCompletedTask(index)">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+                <!-- /.clear -->
+              </span>
+            </li>
+          </ul>
+          <h2 class="title" v-else="">Nussuna Completata</h2>
+        </section>
+        <!-- /.tasks_completed -->
+
+        <!-- #tasks_cestinate -->
+        <section id="tasks_cestinate">
+          <h2 class="title">Cestino</h2>
+          <button @click="clertTrash()"><i class="fas fa-bomb"></i></i></button>
+          <ul class="tasks_trash" v-if="trashTasks.length">
+            <li v-for="(task, index) in trashTasks">
+              <textarea class="textbox"
+                :readonly="trashTasks[index].editable"> {{trashTasks[index].taskName}} </textarea>
+              <span class="icon_section">
+                <span id="reload_task" @click="reloadTrashTask(index)">
+                  <i class="fas fa-arrow-alt-to-top"></i>
+                </span>
+                <span class="clear" @click="clearTaskTrash(index)">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+                <!-- /.clear -->
+              </span>
+            </li>
+
+          </ul>
+          <h2 class="title" v-else="">Cestino Vuoto</h2>
+        </section>
+        <!-- /#tasks_cestinate -->
+      </div>
+      <!-- /.wrap -->
     </div>
     <!-- /.container -->
 

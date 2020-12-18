@@ -20,36 +20,45 @@ let taskList = new Vue({
       logo1:"https://cdn.pixabay.com/photo/2020/01/21/18/39/todo-4783676_960_720.png",
       logo2:"https://www.boolean.careers/images/misc/logo.png",
     },
+    time: '',
     tasks: [
       {
         taskName: "Ricordati di pushare1",
         editable: true,
         important: false,
         completionStatus: false,
+        trash: false,
       },
       {
         taskName: "Ricordati di pushare2",
         editable: true,
         important: false,
         completionStatus: false,
+        trash: false,
       },
       {
         taskName: "Cambia messaggio di tanto in tanto",
         editable: true,
         important: false,
         completionStatus: false,
+        trash: false,
       },
       {
         taskName: "Commenta il codice",
         editable: true,
         important: false,
         completionStatus: false,
+        trash: false,
       },
     ],
     newTask: "",
     completedTasks:[],
+    trashTasks:[],
   },
   methods: {
+    updateTime() {
+      this.time = new Date().toLocaleTimeString();
+    },
     addTask: function(){
       //con il condizionela evito stringhe vuote - si potrebbe provare ad attivare la condizione di error del tag input
       if (this.newTask.length >= 4) {
@@ -57,13 +66,11 @@ let taskList = new Vue({
           taskName: this.newTask,
           editable: true,
           important: false,
-          completionStatus: false
+          completionStatus: false,
+          trash: false,
         });
       }
       this.newTask = ''; //elimino il contenuto dell'input dopo il submit/invio dati
-    },
-    clearTask(index) {
-      this.tasks.splice(index,1);//splice mi permette di rimuovere, in questo caso, 1 elemento, cioè se stesso partendo dall'index cioè dove clicco
     },
     importantTask(index) {
       if (this.tasks[index].important) {
@@ -74,6 +81,9 @@ let taskList = new Vue({
         this.tasks[index].important = true;
         this.tasks.sort((x,y) => y.important - x.important);//ordine decrescente mi garantisce che gli iSimportan siano sempre più in alto de notImportant
       }
+    },
+    clearTask(index) {
+      this.tasks.splice(index,1);
     },
     editableClick(index) {
       if (this.tasks[index].editable) {
@@ -86,7 +96,6 @@ let taskList = new Vue({
       if (!this.tasks[index].completionStatus) {
         this.tasks[index].completionStatus = true;
         this.completedTasks.push(this.tasks[index]);
-        console.log(this.tasks[index]);
         this.clearTask(index);
       }
     },
@@ -106,7 +115,31 @@ let taskList = new Vue({
         this.tasks.push(this.completedTasks[index]);
         this.clearCompletedTask(index);
         } // do la possibilità di modificare una task completata e reintegrarla nelle task da completare
-    }
+    },
+    shiftTaskTrash(index){
+      if (!this.tasks[index].trash) {
+        this.tasks[index].trash = true;
+        this.trashTasks.push(this.tasks[index]);
+        this.clearTask(index);
+      }
+    },
+    reloadTrashTask(index) {
+      if (this.trashTasks[index].trash) {
+        this.trashTasks[index].trash = false;
+        this.tasks.push(this.trashTasks[index]);
+        this.clearTaskTrash(index);
+        } // do la possibilità di modificare una task completata e reintegrarla nelle task da completare
+    },
+    clearTaskTrash(index){
+      this.trashTasks.splice(index,1);
+    },
+    clertTrash(){
+      this.trashTasks = [];
+    },
+    clertCompletedList(){
+      this.completedTasks = [];
+    },
   },
 });
+setInterval(taskList.updateTime, 1000);
 

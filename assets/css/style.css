@@ -4,20 +4,27 @@
   box-sizing: border-box;
 }
 
-
 body {
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
   align-content: center;
+  color: #fff;
+  background: linear-gradient(to left top, #242424, #221f21, #363238, #3a3b44, #efefef);
+  background-repeat: no-repeat;
 }
 
 #todoapp {
-  border: 1px solid rgb(126, 126, 126);
-  box-shadow:rgba(0, 0, 0, 0.4) 6px 3px 6px 5px inset;
+  max-height: max-content;
+  max-width: 50%;
+  min-width: max-content;
+  border: 4px solid rgb(50 45 45);
+  box-shadow:rgba(158, 158, 158, 0.63) 5px 3px 2px 3px inset,
+  rgba(158, 158, 158, 0.63) 7px 2px 2px 0px;
   border-radius: 15%;
-  padding-bottom: 15px;
+  padding: 35px;
 }
 
 .title,
@@ -26,17 +33,57 @@ body {
   font-weight: 500;
   font-size: 32px;
   text-align: center;
-  margin: 40px;
+  margin: 20px 40px;
 }
 h1 {
   font-size: xxx-large;
 }
 
+#icon_task,
+#icon_completed_task,
+#icon_trash_task {
+  position: relative;
+}
+
+#counter_task,
+#counter_completed_task,
+#counter_trash_task {
+  color: #001533;
+  font-size: 1.4em;
+  padding: 2px 3px;
+  background-color: #ffef10;
+  border-radius: 10%;
+  position: absolute;
+  left: -10px;
+}
+
+#clock {
+  font-family: monaco;
+  /* font-family: 'Share Tech Mono',
+  monospace; */
+  color: rgb(0,21,51);
+  text-align: center;
+  text-shadow: 0 1px 2px rgb(14, 146, 14),0 0 20px rgba(10, 175, 230, 0);
+}
+
+#clock .time {
+  letter-spacing: 0.05em;
+  font-size: 40px;
+  padding: 5px 0;
+}
+
 img.logo {
-  height: 80px;
+  height: 60px;
   text-align: center;
   position: relative;
   right: 9%;
+}
+
+.top_icon {
+  color: rgb(1 220 100);
+  text-shadow: 1px 1px 2px #fff;
+  font-size: 3.1em;
+  margin: 12px;
 }
 
 ul {
@@ -52,22 +99,25 @@ li{
   padding: 10px 15px 0px 15px ;
   margin: 15px auto;
   position: relative;
+  background-image: linear-gradient(to right top, #000000, #1c181b, #2e2a31, #3d3e4a, #485563);
 }
 
 .textbox {
-  width: 70%;
+  color: #fff;
+  max-width: 70%;
   vertical-align: text-top;
   font-family: 'Dancing Script',cursive;
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: 400;
   text-transform: capitalize;
   border: 0;
   resize: none;
   overflow:auto;
+  background-color: transparent;
 }
 /* webkit-scrollbar  */
 textarea::-webkit-scrollbar {
-  width: 0.6em;
+  width: 0.1em;
 }
 textarea::-webkit-scrollbar-track {
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
@@ -80,6 +130,11 @@ textarea::-webkit-scrollbar-thumb {
   position: absolute;
   right: 0px;
 }
+
+.tasks_completed .checked {
+  color: rgb(14, 146, 14);
+}
+
 .clear,
 .important,
 #reload_task {
@@ -97,15 +152,43 @@ form .input_task {
   border-radius: 10px;
 }
 
-input[type="submit"] {
-  background: rgb(255, 255, 255);
+input[type="submit"],
+#tasks_cestinate button,
+#tasks_completed button {
+  color: #fff;
+  font-family: 'Dancing Script',
+  cursive;
+  font-size: 18px;
   border-radius: 10px;
   padding: 10px 15px;
   margin-top: 15px;
+  background: rgb(14, 146, 14);
+  box-shadow: 2px 0px 1px 1px #fff inset;
   transition: 250ms ease-out;
 }
 
+#tasks_cestinate button,
+#tasks_completed button{
+  margin: auto;
+  position: relative;
+  left: 8%;
+}
+
 input[type="submit"]:hover {
-  color: #fff;
-  background: rgb(14, 146, 14);
+  color: #1c181b; 
+  box-shadow: -2px 0px 1px 1px rgb(17, 0, 0) inset;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.wrap li {
+  width: 100%;
+  height: max-content;
+}
+
+.wrap li .textbox {
+  margin-top: 12px;
 }

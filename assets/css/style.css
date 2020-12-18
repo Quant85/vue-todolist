@@ -131,7 +131,7 @@ textarea::-webkit-scrollbar-thumb {
   right: 0px;
 }
 
-.tasks_completed .checked {
+#tasks_completed .checked {
   color: rgb(14, 146, 14);
 }
 
